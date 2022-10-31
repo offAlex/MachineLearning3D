@@ -14,8 +14,8 @@ public class MoveToCoinsAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(Random.Range(-3.5f,3.5f), 1, Random.Range(-3f,0f));
-        targetTransform.localPosition = new Vector3(Random.Range(-3.5f,3.5f), 1, Random.Range(1f,4f));
+        transform.localPosition = new Vector3(Random.Range(-3.5f,3.5f), 1, Random.Range(-3f,-1.2f));
+        targetTransform.localPosition = new Vector3(Random.Range(-3.5f,3.5f), 1, Random.Range(1.5f,3.9f));
     }
 
     public override void CollectObservations(VectorSensor sensor)
