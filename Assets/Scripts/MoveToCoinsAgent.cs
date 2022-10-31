@@ -5,7 +5,8 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
-using Random = System.Random;
+using Random = UnityEngine.Random;
+
 
 public class MoveToCoinsAgent : Agent
 {
@@ -13,13 +14,14 @@ public class MoveToCoinsAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.position = new Vector3(0, 1, 0);
+        transform.localPosition = new Vector3(Random.Range(-3.5f,3.5f), 1, Random.Range(-3f,0f));
+        targetTransform.localPosition = new Vector3(Random.Range(-3.5f,3.5f), 1, Random.Range(1f,4f));
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.position);
-        sensor.AddObservation(targetTransform.position);
+        sensor.AddObservation(transform.localPosition);
+        sensor.AddObservation(targetTransform.localPosition);
     }
 
     public override void OnActionReceived(ActionBuffers action)
@@ -28,7 +30,7 @@ public class MoveToCoinsAgent : Agent
         float moveZ = action.ContinuousActions[1];
         float moveSpeed = 3f;
 
-        transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
+        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
